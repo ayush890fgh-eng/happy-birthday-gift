@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Infinity & Beyond | Annu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pink: #ff007f;
+            --violet: #7a00ff;
+            --cyan: #00d4ff;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            margin: 0;
+            background: #020205;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Ambient Background Particles */
+        .orb {
+            position: absolute;
+            width: 200px; height: 200px;
+            background: var(--violet);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.4;
+            animation: move 10s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-50%, -50%); }
+            to { transform: translate(50%, 50%); }
+        }
+
+        /* Main Card */
+        .main-card {
+            width: 90%;
+            max-width: 380px;
+            height: 85vh;
+            background: rgba(15, 15, 25, 0.7);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 1);
+            position: relative;
+        }
+
+        /* Navigation Pages */
+        .step { display: none; height: 100%; flex-direction: column; justify-content: center; }
+        .active { display: flex; animation: slideReveal 0.8s cubic-bezier(0.19, 1, 0.22, 1); }
+
+        @keyframes slideReveal {
+            from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        /* Typography */
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin: 0; color: var(--cyan); text-shadow: 0 0 15px var(--cyan); }
+        .sub { font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; color: var(--pink); font-weight: 800; margin-bottom: 10px; }
+
+        /* Timeline Items */
+        .item { background: var(--glass); padding: 12px; border-radius: 15px; margin: 8px 0; border: 1px solid rgba(255,255,255,0.05); text-align: left; font-size: 0.9rem; }
+        .item b { color: var(--cyan); }
+
+        /* The Gift Box */
+        .gift-container {
+            margin: 20px auto;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .gift-icon { font-size: 80px; animation: shake 0.5s infinite alternate; display: inline-block; }
+        @keyframes shake { 
+            0% { transform: rotate(-10deg); } 
+            100% { transform: rotate(10deg) scale(1.1); } 
+        }
+
+        /* Premium Button */
+        .next-btn {
+            background: linear-gradient(90deg, var(--violet), var(--pink));
+            border: none; color: white;
+            padding: 18px; border-radius: 20px;
+            font-weight: 800; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(122, 0, 255, 0.3);
+            margin-top: auto;
+        }
+
+        /* Bubble Effect */
+        .bubble {
+            position: absolute; bottom: -20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rise 5s infinite ease-in;
+            z-index: -1;
+        }
+        @keyframes rise {
+            to { transform: translateY(-110vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb"></div>
+    <div class="orb" style="right: 0; bottom: 0; background: var(--pink);"></div>
+
+    <div class="main-card">
+        
+        <div id="step1" class="step active">
+            <div class="sub">Exclusive For</div>
+            <h1>Annu</h1>
+            <p style="opacity: 0.6;">A special digital space crafted for the person who deserves the world today.</p>
+            <div style="font-size: 50px; margin: 20px;">🎆</div>
+            <button class="next-btn" onclick="go(2)">Unlock Your Day →</button>
+        </div>
+
+        <div id="step2" class="step">
+            <div class="sub">The Sister Vibe</div>
+            <h2 style="margin: 0;">Why You're Top Tier</h2>
+            <div style="margin: 20px 0;">
+                <div class="item">✨ <b>Unique:</b> One in 8 billion. Truly.</div>
+                <div class="item">🤣 <b>The Humor:</b> Nobody gets my jokes like you.</div>
+                <div class="item">🛡️ <b>Real:</b> Always kept it 100% with me.</div>
+                <div class="item">💎 <b>Soul:</b> Purest heart I've ever known.</div>
+            </div>
+            <button class="next-btn" onclick="go(3)">See Your Gift →</button>
+        </div>
+
+        <div id="step3" class="step">
+            <div class="sub">Final Surprise</div>
+            <h2>Tap the Gift!</h2>
+            <div class="gift-container" onclick="finalCelebrate(this)">
+                <span class="gift-icon" id="gift">🎁</span>
+            </div>
+            <p id="msg" style="opacity: 0.6;">Something big is waiting inside...</p>
+            <button class="next-btn" style="background: grey; opacity: 0.5;" disabled>Happy Birthday Annu! ❤️</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        // Bubble Generator
+        function createBubble() {
+            const b = document.createElement('div');
+            b.className = 'bubble';
+            const s = Math.random() * 40 + 10 + 'px';
+            b.style.width = s; b.style.height = s;
+            b.style.left = Math.random() * 100 + 'vw';
+            b.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(b);
+            setTimeout(() => b.remove(), 5000);
+        }
+        setInterval(createBubble, 300);
+
+        // Navigation
+        function go(s) {
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + s).classList.add('active');
+            confetti({ particleCount: 60, spread: 70, origin: { y: 0.8 }, colors: ['#00d4ff', '#ff007f'] });
+        }
+
+        // Final Box Opening
+        function finalCelebrate(el) {
+            const gift = document.getElementById('gift');
+            const msg = document.getElementById('msg');
+            
+            gift.innerHTML = "✨🎊✨";
+            gift.style.animation = "none";
+            gift.style.transform = "scale(2)";
+            msg.innerHTML = "<b>HAPPY BIRTHDAY ANNU!</b><br>You are officially the coolest person today!";
+            msg.style.opacity = "1";
+            msg.style.color = "#00d4ff";
+
+            // Infinite Confetti Storm
+            var duration = 15 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                var particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+    </script>
+</body>
+</html>
